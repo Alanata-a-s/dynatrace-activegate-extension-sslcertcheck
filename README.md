@@ -16,7 +16,7 @@ This plugin is deployed on Dynatrace Active Gate
 
 # Installation
 
-1. Download the release zip file from the [releases](releases) page named custom.remote.python.certcheck.zip.
+1. Download the release zip file from the [releases](https://github.com/TEMPEST-a-s/dynatrace-activegate-extension-sslcertcheck/releases) page named custom.remote.python.certcheck.zip.
 1. Upload the zip file `custom.remote.python.certcheck.zip` to your Dynatrace tenant by pressing button in Dyntarce GUI: `Settings->Monitoring->Monitoring technologies->Custom extensions->Upload extension`
 1. Unzip the extension zip file on ActiveGate server: 
     * For Linux server unzip file into /opt/dynatrace/remotepluginmodule/plugin_deployment

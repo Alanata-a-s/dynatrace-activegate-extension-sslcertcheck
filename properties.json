@@ -1,0 +1,12 @@
+{ 
+ "poll_interval": 5,
+ "event_warning": 45,
+ "event_worning_type": "Resource",
+ "event_error": 30,
+ "event_error_type": "Error",
+ "hosts": "zive.aktuality.sk,google.com,expired.badssl.com,wrong.host.badssl.com",
+ "hosts_file": "/tmp/myhosts",
+ "metrics": true,
+ "debug": true
+}
+

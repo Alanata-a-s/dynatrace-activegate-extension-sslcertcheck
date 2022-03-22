@@ -1,0 +1,182 @@
+{
+	"name": "custom.remote.python.certcheck",
+	"version": "0.112",
+	"type": "python",
+	"entity": "CUSTOM_DEVICE",
+	"metricGroup": "tech.CertificateCheck",
+	"technologies": [
+		"SSL/TLS Certificates"
+	],
+	"favicon": "https://img.icons8.com/windows/100/000000/tls.png",
+	"source": {
+		"package": "certcheck_activegate_plugin",
+		"className": "CertCheckPluginRemote",
+		"install_requires": [
+			"asn1crypto"
+		],
+		"activation": "Remote"
+	},
+	"configUI": {
+		"displayName": "SSL/TLS Certificates Check ActiveGate Extension",
+		"properties": [
+			{
+				"key": "poll_interval",
+				"displayName": "Poll Interval",
+				"displayOrder": 1,
+				"displayHint": "How often certificates should be checked in hours"
+			},
+			{
+				"key": "event_warning",
+				"displayName": "First event",
+				"displayOrder": 2,
+				"displayHint": "Raise first warning event before expiration in Days"
+			},
+			{
+				"key": "event_warning_type",
+				"displayName": "First Event Type",
+				"displayOrder": 3,
+				"displayHint": "The type of event to raise for first warning event"
+			},
+			{
+				"key": "event_error",
+				"displayName": "Second event",
+				"displayOrder": 4,
+				"displayHint": "Raise second error event before expiration in Days"
+			},
+			{
+				"key": "event_error_type",
+				"displayName": "Second Event Type",
+				"displayOrder": 5,
+				"displayHint": "The type of event to raise for second error event"
+			},
+			{
+				"key": "hosts",
+				"displayName": "Hosts",
+				"displayOrder": 6,
+				"displayHint": "Comma seperated list of a certificates to check eg. www.google.com,www.example.com:443"
+			},
+			{
+				"key": "hosts_file",
+				"displayName": "Hosts file",
+				"displayOrder": 7,
+				"displayHint": "Path on ActiveGate to hosts file with certificates to check delimited by newline"
+			},
+			{
+				"key": "metrics",
+				"displayName": "Send metrics",
+				"displayHint": "Send metrics for each checked certificate",
+				"displayOrder": 8
+			},
+			{
+				"key": "debug",
+				"displayName": "Debug",
+				"displayHint": "Enable debug logging",
+				"displayOrder": 9
+			}
+		]
+	},
+	"properties": [
+		{
+			"key": "poll_interval",
+			"type": "Integer",
+			"defaultValue": 12
+		},
+		{
+			"key": "event_warning",
+			"type": "Integer",
+			"defaultValue": 20
+		},
+		{
+			"key": "event_warning_type",
+			"type": "Dropdown",
+			"defaultValue": "Resource",
+			"dropdownValues": [
+				"Availability",
+				"Error",
+				"Slowdown",
+				"Resource",
+				"Custom Info",
+				"Suppress"
+			]
+		},
+		{
+			"key": "event_error",
+			"type": "Integer",
+			"defaultValue": 5
+		},
+		{
+			"key": "event_error_type",
+			"type": "Dropdown",
+			"defaultValue": "Error",
+			"dropdownValues": [
+				"Availability",
+				"Error",
+				"Slowdown",
+				"Resource",
+				"Custom Info",
+				"Suppress"
+			]
+		},
+		{
+			"key": "hosts",
+			"type": "Textarea"
+		},
+		{
+			"key": "hosts_file",
+			"type": "String"
+		},
+		{
+			"key": "metrics",
+			"type": "Boolean",
+			"defaultValue": true
+		},
+		{
+			"key": "debug",
+			"type": "Boolean",
+			"defaultValue": false
+		}
+	],
+	"metrics": [
+		{
+			"entity": "CUSTOM_DEVICE",
+			"timeseries": {
+				"key": "days_to_expire",
+				"aggregation": "avg",
+				"unit": "Count",
+				"displayname": "Days to expiration"
+			}
+		},
+		{
+			"entity": "CUSTOM_DEVICE",
+			"timeseries": {
+				"key": "expired",
+				"aggregation": "max",
+				"unit": "Count",
+				"displayname": "Expired certificates"
+			}
+		}
+	],
+	"ui": {
+		"keymetrics": [
+			{
+			  "key": "expired",
+			  "aggregation": "max",
+			  "mergeaggregation": "sum",
+			  "displayname": "Expired certificates"
+			}
+		  ],
+		  "keycharts": [
+			{
+			  "group": "Certificate expiration",
+			  "title": "Expiration state",
+			  "series": [
+				{
+				  "key": "days_to_expire",
+				  "displayname": "Days to expire",
+				  "seriestype": "line"
+				} 
+			  ]
+			}
+		  ]
+	}
+}

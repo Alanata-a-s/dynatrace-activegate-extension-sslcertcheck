@@ -1,6 +1,6 @@
 {
 	"name": "custom.remote.python.certcheck",
-	"version": "0.112",
+	"version": "1.0",
 	"type": "python",
 	"entity": "CUSTOM_DEVICE",
 	"metricGroup": "tech.CertificateCheck",
